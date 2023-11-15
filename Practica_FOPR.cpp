@@ -80,13 +80,13 @@ void menu_interaccions(char&matriu_1, char&matriu_2, esser&T, esser&M, int&compt
             estat = 'p';
             veure_estat(matriu_2);
             cout<<"A reveure!"<<endl;
-            cout<<"Has fet"<<" "<<comptador<<" "<<moviments"<<endl;
+            cout<<"Has fet"<<" "<<comptador<<" "<<moviments<<endl;
         }
         ++comptador;
     }
     if(estat == 'a') cout<<"Has perdut! El Minotaure t'ha atrapat!"<<endl;
     if(estat == 'g') cout<<"Felicitats has arribat a la sortida!!"<<endl;
-    cout<<"Has fet"<<" "<<comptador<<" "<<moviments"<<endl;
+    cout<<"Has fet"<<" "<<comptador<<" "<<moviments<<endl;
 }
 
 void veure_estat(char&matriu_2)
