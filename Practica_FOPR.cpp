@@ -10,6 +10,8 @@ struct esser
 };
 //modificar matriz en esta funcion(?)
 // Matriu 1 y 2 comprobar si estan bien declarados.
+//Pre:
+//Post:
 void moviments_en_laberint(char&matriu_1, char&matriu_2, esser&T, esser&M, int&comptador, char moviment, char condicion_joc)
 {
 //Recordatorio: Mirar caso extremo 2 o mas salidas, acceder fuera de la matriz(segmentation fault)
@@ -48,7 +50,8 @@ void moviments_en_laberint(char&matriu_1, char&matriu_2, esser&T, esser&M, int&c
         
         matriu_2[T.Px+1][T.Py+1] = matriu_1[T.Px+1][T.Py+1];
 }
-
+//Pre:
+//Post:
 void menu_interaccions(char&matriu_1, char&matriu_2, esser&T, esser&M, int&comptador)
 {
     int entrada;
@@ -88,7 +91,8 @@ void menu_interaccions(char&matriu_1, char&matriu_2, esser&T, esser&M, int&compt
     if(estat == 'g') cout<<"Felicitats has arribat a la sortida!!"<<endl;
     cout<<"Has fet"<<" "<<comptador<<" "<<moviments<<endl;
 }
-
+//Pre:
+//Post:
 void veure_estat(char&matriu_2)
 {
     for(unsigned int i = 0; i < matriu_2.size(), ++i)
@@ -99,7 +103,8 @@ void veure_estat(char&matriu_2)
             }
         }
 }
-
+//Pre:
+//Post:
 void lectura dades()
 {
     int mida_fila, mida_columna;
@@ -133,7 +138,8 @@ void lectura dades()
     moviments_en_laberint(matriu_1, matriu_2, T,M,comptador);
     menu_interaccions(matriu_1, matriu_2, T,M,comptador);
 }
-
+//Pre: Es cert
+//Post: Retorna l'acabament del programa
 int main()
 {
     lectura_dades();
