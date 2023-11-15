@@ -7,7 +7,7 @@ typedef vector<char> Vect;
 typedef vector<vect> Matriu;
 void moviments_en_laberint()
 {
-hfejfèr
+hola hola hola 
 }
 
 void menu_interacciones()
