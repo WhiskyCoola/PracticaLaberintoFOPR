@@ -8,11 +8,15 @@ struct esser
     int Py;
     char antiga_casella;
 };
+
+
+typedef vector<char> FILA;
+typedef vector<FILA> MATRIU;
 //modificar matriz en esta funcion(?)
 // Matriu 1 y 2 comprobar si estan bien declarados.
 //Pre:
 //Post:
-void eliminar_boira(char&matriu_1, char&matriu_2, esser&T, esser&M)
+void eliminar_boira(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M)
 {
      matriu_2[T.Px][T.Py] = 'T';
         
@@ -32,7 +36,7 @@ void eliminar_boira(char&matriu_1, char&matriu_2, esser&T, esser&M)
         
         matriu_2[T.Px+1][T.Py+1] = matriu_1[T.Px+1][T.Py+1];
 }
-void moviments_en_laberint(char&matriu_1, char&matriu_2, esser&T, esser&M, int&comptador, char moviment, char&condicio_joc)
+void moviments_en_laberint(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int&comptador, char moviment, char&condicio_joc)
 {
 //Recordatorio: Mirar caso extremo 2 o mas salidas, acceder fuera de la matriz(segmentation fault)
     
@@ -123,7 +127,7 @@ void moviments_en_laberint(char&matriu_1, char&matriu_2, esser&T, esser&M, int&c
 }
 //Pre:
 //Post:
-void menu_interaccions(char&matriu_1, char&matriu_2, esser&T, esser&M, int&comptador)
+void menu_interaccions(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int&comptador)
 {
     int entrada, comptador_minotauro = 0;
     char estat = 'n'; // a = atrapat, p = perdut, g = guanyat;
@@ -169,7 +173,7 @@ void menu_interaccions(char&matriu_1, char&matriu_2, esser&T, esser&M, int&compt
 }
 //Pre:
 //Post:
-void veure_estat(char&matriu_2)
+void veure_estat(MATRIU &matriu_2)
 {
     for(unsigned int i = 0; i < matriu_2.size(), ++i)
         {
@@ -185,9 +189,9 @@ void lectura dades()
 {
     int mida_fila, mida_columna;
     cin>>mida_fila>>mida_columna;
-    
+    MATRIU matriu_1(mida_fila, FILA(mida_columna));
     //matriz estatica ya que el tamaño es constante y no se requiere ni push ni pop
-    char matriu_1[mida_fila][mida_columna];
+    //char matriu_1[mida_fila][mida_columna];
     
     esser T, M;
 
@@ -200,8 +204,8 @@ void lectura dades()
             else if(entrada == 'M') M.Px = j, M.Py = i;
         }
     }
-
-    int matriu_2[mida_fila][mida_columna]; // Matriz que se utiliza para mostrar por pantalla
+    MATRIU matriu_2(mida_fila,FILA(mida_columna));
+    //int matriu_2[mida_fila][mida_columna]; // Matriz que se utiliza para mostrar por pantalla
      for(int i = 0; i < mida_fila; ++i)
     {
         for(int j = 0; j < mida_columna; ++j)
