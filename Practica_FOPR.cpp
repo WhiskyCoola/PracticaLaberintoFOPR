@@ -175,7 +175,7 @@ void menu_interaccions(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int
             estat = 'p';
             veure_estat(matriu_2);
             cout<<"A reveure!"<<endl;
-            cout<<"Has fet"<<" "<<comptador<<" "<<moviments<<endl;
+            cout<<"Has fet"<<" "<<comptador<<" "<<"moviments"<<endl;
         }
         ++comptador;
         if(comptador_minotauro == 2)
@@ -186,7 +186,7 @@ void menu_interaccions(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int
     }
     if(estat == 'a') cout<<"Has perdut! El Minotaure t'ha atrapat!"<<endl;
     if(estat == 'g') cout<<"Felicitats has arribat a la sortida!!"<<endl;
-    cout<<"Has fet"<<" "<<comptador<<" "<<moviments<<endl;
+    cout<<"Has fet"<<" "<<comptador<<" "<<"moviments"<<endl;
 }
 //Pre:
 //Post:
