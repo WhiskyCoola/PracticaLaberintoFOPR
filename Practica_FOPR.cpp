@@ -36,7 +36,7 @@ void eliminar_boira(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M)
         
         matriu_2[T.Px+1][T.Py+1] = matriu_1[T.Px+1][T.Py+1];
 }
-void moviments_en_laberint(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int&comptador, char moviment, char&condicio_joc)
+void moviments_en_laberint(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int&comptador, char moviment, char condicio_joc)
 {
 //Recordatorio: Mirar caso extremo 2 o mas salidas, acceder fuera de la matriz(segmentation fault)
     
@@ -181,7 +181,7 @@ void menu_interaccions(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int
         if(comptador_minotauro == 2)
         {
             comptador_minotauro = 0;
-            moviments_en_laberint(matriu_1, matriu_2, T, M, comptador, 'w', 'w')
+            moviments_en_laberint(matriu_1, matriu_2, T, M, comptador, 'w', 'w');
         }
     }
     if(estat == 'a') cout<<"Has perdut! El Minotaure t'ha atrapat!"<<endl;
@@ -190,7 +190,7 @@ void menu_interaccions(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int
 }
 //Pre:
 //Post:
-void lectura dades()
+void lectura_dades()
 {
     int mida_fila, mida_columna;
     cin>>mida_fila>>mida_columna;
@@ -205,8 +205,8 @@ void lectura dades()
         for(int j = 0; j < mida_columna; ++j)
         {
             cin>>matriu_1[i][j]; //Matriz de referencia, este se utiliza de guia 
-            if(entrada == 'T') T.Px = j, T.Py = i;
-            else if(entrada == 'M') M.Px = j, M.Py = i;
+            if(matriu_1[i][j] == 'T') T.Px = j, T.Py = i;
+            else if(matriu_1[i][j] == 'M') M.Px = j, M.Py = i;
         }
     }
     MATRIU matriu_2(mida_fila,FILA(mida_columna));
@@ -221,7 +221,8 @@ void lectura dades()
     int comptador = 0;
     moviments_en_laberint(matriu_1, matriu_2, T,M,comptador,'W','n');
     //He puesto veure estat abajo para que asi modifique primero y se vea en un rango 3x3 de casillas para luego veure_estat haga cout
-    cout<<veure_estat(matriu_2)<<endl;
+    veure_estat(matriu_2);
+    /*SALTO DE LINEA (POSIBLE ERROR DE LINEA )*/cout<<endl;
     menu_interaccions(matriu_1, matriu_2, T,M,comptador);
 }
 //Pre: Es cert
