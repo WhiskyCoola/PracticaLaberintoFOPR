@@ -125,6 +125,23 @@ void moviments_en_laberint(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M,
         }
     }
 }
+
+
+//Pre:
+//Post:
+void veure_estat(MATRIU &matriu_2)
+{
+    for(unsigned int i = 0; i < matriu_2.size(); ++i)
+        {
+        for(unsigned int j = 0; j < matriu_2[0].size(); ++j)
+            {
+                cout<<matriu_2[i][j];
+            }
+        }
+}
+
+
+
 //Pre:
 //Post:
 void menu_interaccions(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int&comptador)
@@ -170,18 +187,6 @@ void menu_interaccions(MATRIU &matriu_1, MATRIU &matriu_2, esser&T, esser&M, int
     if(estat == 'a') cout<<"Has perdut! El Minotaure t'ha atrapat!"<<endl;
     if(estat == 'g') cout<<"Felicitats has arribat a la sortida!!"<<endl;
     cout<<"Has fet"<<" "<<comptador<<" "<<moviments<<endl;
-}
-//Pre:
-//Post:
-void veure_estat(MATRIU &matriu_2)
-{
-    for(unsigned int i = 0; i < matriu_2.size(), ++i)
-        {
-        for(unsigned int j = 0; j < matriu_2[0].size(), ++j)
-            {
-                cout<<matriu_2[i][j];
-            }
-        }
 }
 //Pre:
 //Post:
