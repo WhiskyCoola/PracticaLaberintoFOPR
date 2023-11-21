@@ -1,5 +1,4 @@
 #include <iostream>
-#include <struct>
 #include <vector>
 using namespace std;
 
@@ -7,11 +6,32 @@ struct esser
 {
     int Px;
     int Py;
+    char antiga_casella;
 };
 //modificar matriz en esta funcion(?)
 // Matriu 1 y 2 comprobar si estan bien declarados.
 //Pre:
 //Post:
+void eliminar_boira(char&matriu_1, char&matriu_2, esser&T, esser&M)
+{
+     matriu_2[T.Px][T.Py] = 'T';
+        
+        matriu_2[T.Px-1][T.Py] = matriu_1[T.Px-1][T.Py];
+        
+        matriu_2[T.Px+1][T.Py] = matriu_1[T.Px+1][T.Py];
+        
+        matriu_2[T.Px][T.Py-1] = matriu_1[T.Px][T.Py-1];
+        
+        matriu_2[T.Px][T.Py+1] = matriu_1[T.Px][T.Py+1];
+        
+        matriu_2[T.Px-1][T.Py-1] = matriu_1[T.Px-1][T.Py-1];
+        
+        matriu_2[T.Px-1][T.Py+1] = matriu_1[T.Px-1][T.Py+1];
+        
+        matriu_2[T.Px+1][T.Py-1] = matriu_1[T.Px+1][T.Py-1];
+        
+        matriu_2[T.Px+1][T.Py+1] = matriu_1[T.Px+1][T.Py+1];
+}
 void moviments_en_laberint(char&matriu_1, char&matriu_2, esser&T, esser&M, int&comptador, char moviment, char&condicio_joc)
 {
 //Recordatorio: Mirar caso extremo 2 o mas salidas, acceder fuera de la matriz(segmentation fault)
@@ -32,35 +52,73 @@ void moviments_en_laberint(char&matriu_1, char&matriu_2, esser&T, esser&M, int&c
     {
         if(matriu_1[T.Px+1][T.Py] == '_') matriu_1[T.Px][T.Py] = '_', ++T.Px, matriu_1[T.Px][T.Py] = 'T';
     }
-        matriu_2[T.Px][T.Py] = 'T';
-        
-        matriu_2[T.Px-1][T.Py] = matriu_1[T.Px-1][T.Py];
-        
-        matriu_2[T.Px+1][T.Py] = matriu_1[T.Px+1][T.Py];
-        
-        matriu_2[T.Px][T.Py-1] = matriu_1[T.Px][T.Py-1];
-        
-        matriu_2[T.Px][T.Py+1] = matriu_1[T.Px][T.Py+1];
-        
-        matriu_2[T.Px-1][T.Py-1] = matriu_1[T.Px-1][T.Py-1];
-        
-        matriu_2[T.Px-1][T.Py+1] = matriu_1[T.Px-1][T.Py+1];
-        
-        matriu_2[T.Px+1][T.Py-1] = matriu_1[T.Px+1][T.Py-1];
-        
-        matriu_2[T.Px+1][T.Py+1] = matriu_1[T.Px+1][T.Py+1];
+        eliminar_boira(matriu_1, matriu_2, T, M);
+
     if(moviment == 'w')
     {
         //mirar como resolver el mover al minotauro por horizontal o vertical
-        if((M.Px - T.Px) <= (M.Py - T.Py) ) //Movimiento horizontal
+        int absX = T.Px - M.Px;
+        if(absX < 0) absX * -1;
+        int absY = T.Py - M.Py;
+        if(absY < 0) absY * -1;
+    /*  Dentro de la matriz calculamos la distancia entre T y M en valor absoluto     */
+        //Movimiento en horizontal
+        if(absX <= absY)
         {
-            if(matriu_1[M.Px-1][M.Py] == 'T') condicio_joc = 'a';
+            if(T.Px < M.Px)
+            {
+               //mover a la izquierda
+            //guardamos el caracter de la casilla a la que queremos acceder, movemos la M, y la posicion inicial de M es sustituida
+            //por un espacio vacio o la anterior estructura, ya que M pasa por encima y no los destruye
+            //matriz 1 que es la matriz de referencia es modificada de forma que cuando T llegue a encontrarse con M
+            //Este se mostrara si se encuentra dentro del rango 3x3, y no fuera de su rango.
+            char aux = matriu_1[M.Px-1][M.Py];
+                if(aux == 'T') condicio_joc = 'a';
+                else
+                {
+                    matriu_1[M.Px][M.Py] = M.antiga_casella, --M.Px, matriu_1[M.Px][M.Py] = 'M';
+                    M.antiga_casella = aux; 
+                }
+            
+            }
+            else //mover a la derecha
+            {
+                char aux = matriu_1[M.Px+1][M.Py];
+                if(aux == 'T') condicio_joc = 'a';
+                else 
+                {
+                    matriu_1[M.Px][M.Py] = M.antiga_casella, ++M.Px, matriu_1[M.Px][M.Py] = 'M';
+                    M.antiga_casella = aux;   
+                }
+                 
+            }
+            
         }
-        else if((M.Px - T.Px) > (M.Py - T.Py)) //movimiento vertical
+            //Movimiento vertical
+        else if(absX > absY)
         {
-            if(matriu_1[M.Px][M.Py+1] == 'T') condicio_joc = 'a';
+            if(T.Py < M.Py) // Mover hacia arriba
+            {
+                 char aux = matriu_1[M.Px][M.Py-1];
+                if(aux == 'T') condicio_joc = 'a';
+                else 
+                {
+                    matriu_1[M.Px][M.Py] = M.antiga_casella, --M.Py, matriu_1[M.Px][M.Py] = 'M';
+                    M.antiga_casella = aux;
+                }
+            ; 
+            }
+            else // mover hacia abajo
+            {
+                char aux = matriu_1[M.Px][M.Py+1];
+                if(aux == 'T') condicio_joc = 'a';
+                else 
+                {
+                    matriu_1[M.Px][M.Py] = M.antiga_casella, ++M.Py, matriu_1[M.Px][M.Py] = 'M';
+                    M.antiga_casella = aux;
+                }
+            }
         }
-    
     }
 }
 //Pre:
